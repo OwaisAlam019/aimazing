@@ -161,18 +161,36 @@ class Process extends CI_Controller {
 			if($this->task->add()){
 				$this->load->model('event');
 				$this->load->model('task_type');
+				$this->load->model('supplier');
 				$data["task"] = 'active';
 				$data["events"] = $this->event->fetch_valid_events();
 				$data["task_types"] = $this->task_type->get_all();
 				$data["status"] = 'true';
-				$data["content"] = 'supplier/task/add_task';
-				$this->load->view('supplier/includes/template', $data);
+				if ($this->input->post('supplier_login_id')!="") {
+				$data["suppliers"] = $this->supplier->get_all();
+				$data["content"] = 'admin/task/add_task';
+				$this->load->view('admin/includes/template', $data);
+				
+				}
+				else{
+					$data["content"] = 'supplier/task/add_task';
+					$this->load->view('supplier/includes/template', $data);
+				}
 			}
 
 		} else {
-			$data["task"] = 'active';
-			$data["content"] = 'supplier/task/add_task';
-			$this->load->view('supplier/includes/template', $data);
+			
+			if ($this->input->post('supplier_login_id')!="") {
+				$data["suppliers"] = $this->supplier->get_all();
+				$data["task"] = 'active';
+				$data["content"] = 'admin/task/add_task';
+				$this->load->view('admin/includes/template', $data);
+			}
+			else{
+				$data["task"] = 'active';
+				$data["content"] = 'supplier/task/add_task';
+				$this->load->view('supplier/includes/template', $data);
+			}
 		}
 	}
 
@@ -187,11 +205,16 @@ class Process extends CI_Controller {
 
 			$this->load->model('task');
 			if($this->task->update()){
+				if ($this->input->post('supplier_login_id')!="") {
+					redirect('admin/list_task');
+				}
 				redirect('supplier/list_task');
 			}
 
 		}
-
+		if ($this->input->post('supplier_login_id')!="") {
+					redirect("admin/edit_del_task/".$this->input->post("task_id")."/edit");
+				}
 		redirect("supplier/edit_del_task/".$this->input->post("task_id")."/edit");
 	}
 

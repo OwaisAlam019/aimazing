@@ -12,7 +12,7 @@ class Task extends CI_Model {
 			'event_id' => $this->input->post("event_id"),
 			'reward' => $this->input->post("reward"),
 			'placeholder_text' => $this->input->post("placeholder_text"),
-			'login_id' => $this->session->userdata('login_id')
+			'login_id' => $this->input->post('supplier_login_id')!=''?$this->input->post('supplier_login_id'):$this->session->userdata('login_id')
 		);
 
 		if ($this->db->insert('task',$data))
@@ -31,7 +31,7 @@ class Task extends CI_Model {
 			'event_id' => $this->input->post("event_id"),
 			'reward' => $this->input->post("reward"),
 			'placeholder_text' => $this->input->post("placeholder_text"),
-			'login_id' => $this->session->userdata('login_id')
+			'login_id' => $this->input->post('supplier_login_id')!=''?$this->input->post('supplier_login_id'):$this->session->userdata('login_id')
 		);
 
 		$status = $this->db->where('task_id',$this->input->post('task_id'))->update('task',$data);

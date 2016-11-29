@@ -94,6 +94,58 @@ class Admin extends CI_Controller {
 
 	}
 
+		public function add_task()
+	{	
+		$this->load->model('supplier');
+		$this->load->model('event');
+		$this->load->model('task_type');
+		$data["task"] = 'active';
+		$data["events"] = $this->event->get_all();
+		$data["task_types"] = $this->task_type->get_all();
+		$data["suppliers"] = $this->supplier->get_all();
+		$data["content"] = 'admin/task/add_task';
+		$this->load->view('admin/includes/template', $data);
+	}
+
+	public function list_task()
+	{
+		$this->load->model('task');
+		$list = $this->task->get_all();
+		if($list){
+			$data["list"] = $list;
+		}
+		$data["task"] = 'active';
+		$data["content"] = 'admin/task/list_task';
+		$this->load->view('admin/includes/template', $data);
+	}
+
+	public function edit_del_task($id = false,$action = false)
+	{
+		if($id && $action){
+			$this->load->model('task');
+			if($action === "delete"){
+				$this->task->delete($id);
+				$this->list_task();
+			}else if($action === "edit"){
+				$this->load->model('event');
+				$this->load->model('task_type');
+				$this->load->model('supplier');
+
+				$list = $this->task->get_by_id($id);
+				if($list){
+					$data["events"] = $this->event->get_all();
+					$data["task_types"] = $this->task_type->get_all();
+					$data["list"] = $list;
+					$data["task"] = 'active';
+					$data["suppliers"] = $this->supplier->get_all();
+					$data["content"] = 'admin/task/edit_task';
+					$this->load->view('admin/includes/template', $data);
+				}
+			}
+		}else
+			show_404('edit_task');
+	}
+
 	public function add_event()
 	{
 		$data["event"] = 'active';

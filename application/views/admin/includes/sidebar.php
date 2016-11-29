@@ -45,6 +45,17 @@
 						<li><a class="" href="<?php echo base_url(); ?>admin/add_supplier"><span class="sub-menu-text">Add Supplier</span></a></li>
 					</ul>
 				</li>
+				<li class="has-sub">
+					<a href="javascript:;" class="">
+						<i class="fa fa-list fa-fw"></i>
+						<span class="menu-text">Tasks</span>
+						<span class="arrow"></span>
+					</a>
+					<ul class="sub">
+						<li><a class="" href="<?php echo base_url(); ?>admin/list_task"><span class="sub-menu-text">View Tasks</span></a></li>
+						<li><a class="" href="<?php echo base_url(); ?>admin/add_task"><span class="sub-menu-text">Add Task</span></a></li>
+					</ul>
+				</li>
 				<li class="has-sub <?php if(isset($event)){echo $event;}?>">
 					<a href="javascript:;" class="">
 						<i class="fa fa-calendar fa-fw"></i>

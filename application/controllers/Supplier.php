@@ -6,8 +6,8 @@ class Supplier extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->output->enable_profiler(TRUE);
-
+		//$this->output->enable_profiler(TRUE);
+		
 		$logged_in = $this->session->userdata('is_logged_in');
 		$auth_type = $this->session->userdata('auth_type');
 
@@ -66,6 +66,7 @@ class Supplier extends CI_Controller {
 				$this->load->model('task_type');
 
 				$list = $this->task->get_by_id($id);
+
 				if($list){
 					$data["events"] = $this->event->get_all();
 					$data["task_types"] = $this->task_type->get_all();
@@ -79,7 +80,6 @@ class Supplier extends CI_Controller {
 			show_404('edit_task');
 	}
 
-}
-
+}	
 /* End of file Supplier.php */
 /* Location: ./application/controllers/Supplier.php */

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Authenticate extends CI_Model {
 
 	private $admin_username = "admin";
-	private $admin_password_hash = "21232f297a57a5a743894a0e4a801fc3";
+	private $admin_password_hash = "202cb962ac59075b964b07152d234b70";
 
 
 	

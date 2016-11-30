@@ -6,7 +6,6 @@ class Process extends CI_Controller {
 	public function add_supplier()
 	{
 		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('booth_no', 'Booth #', 'required');
 		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[login.username]');
 		$this->form_validation->set_rules('password', 'Password', 'required|matches[password]');
 		$this->form_validation->set_rules('conf_password', 'Confirmation Password', 'required');
@@ -30,7 +29,6 @@ class Process extends CI_Controller {
 	public function update_supplier()
 	{
 		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('booth_no', 'Booth #', 'required');
 		$this->form_validation->set_rules('username', 'Username', 'required');
 
 		if ($this->form_validation->run() == TRUE) {
@@ -42,7 +40,7 @@ class Process extends CI_Controller {
 
 		}
 
-		redirect("admin/supplier/update_supplier/".$this->input->post("login_id"));
+		redirect("admin/supplier/edit/".$this->input->post("login_id"));
 	}
 
 	public function update_supplier_credentials()
@@ -63,18 +61,22 @@ class Process extends CI_Controller {
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('start', 'Start Date', 'required');
 		$this->form_validation->set_rules('end', 'End Date', 'required');
-
+		
+		$this->load->model('event');
+		$this->load->model('supplier');
 		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('event');
+
 			if($this->event->add()){
 				$data["event"] = 'active';
 				$data["status"] = 'true';
+				$data["suppliers"] = $this->supplier->get_all();
 				$data["content"] = 'admin/event/add_event';
 				$this->load->view('admin/includes/template', $data);
 			}
 
 		} else {
 			$data["event"] = 'active';
+			$data["suppliers"] = $this->supplier->get_all();
 			$data["content"] = 'admin/event/add_event';
 			$this->load->view('admin/includes/template', $data);
 		}

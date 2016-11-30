@@ -32,11 +32,6 @@
 										<label for="name">Name</label>
 										<input type="text" class="form-control" name="name" value="<?php echo set_value('name'); ?>" id="name"  placeholder="Enter Full Name">
 									</div>
-									
-									<div class="form-group">
-										<label for="booth_no">Booth #</label>
-										<input type="text" class="form-control" name="booth_no" value="<?php echo set_value('booth_no'); ?>" id="booth_no"  placeholder="Booth #">
-									</div>
 									<div class="form-group">
 										<label for="logo">Logo</label>
 										<input type="file" class="btn btn-danger" name="logo" id="logo">

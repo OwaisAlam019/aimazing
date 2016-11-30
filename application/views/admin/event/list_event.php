@@ -60,15 +60,6 @@
 										<?php endif; ?>
 
 										</tbody>
-										<!-- <tfoot>
-										<tr>
-												<th>Rendering engine</th>
-												<th>Browser</th>
-												<th class="hidden-xs">Platform(s)</th>
-												<th>Engine version</th>
-												<th class="hidden-xs">CSS grade</th>
-										</tr>
-										</tfoot> -->
 									</table>
 								</div>
 							</div>

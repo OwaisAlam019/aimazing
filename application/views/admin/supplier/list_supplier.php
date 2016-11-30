@@ -24,7 +24,6 @@
 											<tr>
 												<th>S.No.</th>
 												<th>Name</th>
-												<th>Booth</th>
 												<th>User</th>
 												<th>Logo</th>
 												<th>Edit</th>
@@ -38,7 +37,7 @@
 												<tr>
 													<td><?php echo $n; ?></td>
 													<td><?php echo $row->name; ?></td>
-													<td><?php echo $row->booth_no; ?></td>
+													<!-- <td><?php echo $row->booth_no; ?></td> -->
 													<td><?php echo $row->username; ?></td>
 													<td><img src="<?php echo base_url().$row->image; ?>" height="50"></td>
 													<td class="text-center"><a href="<?php echo base_url(); ?>admin/edit_del_supplier/<?php echo $row->login_id?>/edit" class="glyphicon glyphicon-pencil"></a></td>

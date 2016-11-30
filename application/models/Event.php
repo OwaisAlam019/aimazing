@@ -5,6 +5,10 @@ class Event extends CI_Model {
 
 	public function add()
 	{
+		// echo "<pre>";
+		// var_dump($this->input->post("booth_no"));
+		// echo "</pre>";
+		// exit();
 		$data = array(
 			'name' => $this->input->post("name"),
 			'start' => date("Y-m-d", strtotime($this->input->post("start"))),
@@ -17,8 +21,18 @@ class Event extends CI_Model {
 			$data['image'] = $processed_image;
 		}
 
+	
+
 		if ($this->db->insert('event',$data))
-		{
+		 {
+			$event_id=$this->db->insert_id();
+			$len = count($this->input->post("supplier_id"));
+
+				for ($i=0; $i<$len ; $i++)  {
+			$this->db->insert('event_supplier',array("event_id" =>$event_id,
+													 "supplier_id"=>$this->input->post("supplier_id")[$i],
+													 "booth_no"=>$this->input->post("booth_no")[$i]));
+		}
 			return true;
 		}
 		return false;
@@ -38,9 +52,18 @@ class Event extends CI_Model {
 		if($processed_image){
 			$data['image'] = $processed_image;
 		}
+		$this->db->trans_start();
+		$this->db->where('event_id',$this->input->post('event_id'))->update('event',$data);
+		$this->db->where('event_id',$this->input->post('event_id'))->delete('event_supplier');
+		$len = count($this->input->post("supplier_id"));
 
-		$status = $this->db->where('event_id',$this->input->post('event_id'))->update('event',$data);
-
+				for ($i=0; $i<$len ; $i++)  {
+			$this->db->insert('event_supplier',array("event_id" =>$this->input->post('event_id'),
+													 "supplier_id"=>$this->input->post("supplier_id")[$i],
+													 "booth_no"=>$this->input->post("booth_no")[$i]));
+		}
+		$this->db->trans_complete();
+		$status = $this->db->trans_status();
 		if ($status)
 		{
 			return true;
@@ -49,7 +72,12 @@ class Event extends CI_Model {
 	}
 
 	public function delete($id = false){
-		$status = $this->db->where('event_id',$id)->delete('event');
+		$this->db->trans_start();
+		$this->db->where('event_id',$id)->delete('event');
+		$this->db->where('event_id',$id)->delete('event_supplier');
+		$this->db->trans_complete();
+
+		$status = $this->db->trans_status();
 		if ($status)
 		{
 			return true;

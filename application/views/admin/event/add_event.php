@@ -1,4 +1,5 @@
 <div class="container">
+
 	<div class="row">
 		<div id="content" class="col-lg-12">
 			<!-- PAGE HEADER-->
@@ -13,6 +14,22 @@
 				</div>
 			</div>
 			<!-- /PAGE HEADER -->
+			<?php if(isset($status)): ?>
+			    <div class="row">
+			        <div class="col-md-4 col-md-offset-4">
+			            <div class="alert alert-success text-center" role="alert" id="alert" style="margin-left:0px">
+			                <h3>Form Submitted Successfully!</h3>
+			            </div>
+			        </div>
+			    </div>
+
+			    <script type="text/javascript">
+			        document.addEventListener("DOMContentLoaded", function(){
+			            $("#alert").fadeOut(5000);
+			        }, false);
+			    </script>
+			<?php endif; ?>
+
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BOX -->
@@ -44,6 +61,34 @@
 										<label for="image">Image</label>
 										<input type="file" class="btn btn-danger" name="image" id="image">
 									</div>
+									<div class="box-body">
+									<table  class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>S.No.</th>
+												<th>Supplier</th>
+												<th>Booth Number</th>
+											</tr>
+										</thead>
+										<tbody>
+
+										<?php if(isset($suppliers)): ?>
+											<?php $n = 1; foreach ($suppliers as $supplier): ?>
+												<tr>
+													<td><?php echo $n; ?></td>
+													<td>
+													<label><?php echo $supplier->username; ?></label>
+													<input type="hidden" name="supplier_id[]" value="<?php echo $supplier->supplier_id; ?>">
+													</td>
+													<td><input type="text" name="booth_no[]"></td>
+												</tr>
+											<?php $n++; endforeach; ?>
+										<?php endif; ?>
+
+										</tbody>
+									</table>
+								</div>
+
 									<button type="submit" class="btn btn-success">Add</button>
 								</form>
 							</div>
@@ -60,21 +105,7 @@
 			            </div>
 			        <?php endif; ?>
 
-					<?php if(isset($status)): ?>
-			            <div class="row">
-			                <div class="col-md-4 col-md-offset-4">
-			                    <div class="alert alert-success text-center" role="alert" id="alert" style="margin-left:0px">
-			                        <h3>Form Submitted Successfully!</h3>
-			                    </div>
-			                </div>
-			            </div>
-
-				        <script type="text/javascript">
-				            document.addEventListener("DOMContentLoaded", function(){
-				                $("#alert").fadeOut(5000);
-				            }, false);
-				        </script>
-			        <?php endif; ?>
+					
 
 				</div>
 			</div>

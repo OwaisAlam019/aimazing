@@ -37,7 +37,7 @@
 										<thead>
 											<tr>
 												<th>S.No.</th>
-												<th>Task Name</th>
+												<th>Supplier Name</th>
 												<th>Completed</th>
 												<th>Reward</th>
 												<th>Task Type</th>
@@ -52,7 +52,7 @@
 											<?php $n = 1; foreach ($list as $row): ?>
 												<tr>
 													<td><?php echo $n; ?></td>
-													<td><?php echo $row->name; ?></td>
+													<td><?php echo $row->supplier_name; ?></td>
 													<td><?php echo $row->num_completed; ?></td>
 													<td><?php echo $row->reward; ?></td>
 													<td><?php echo $row->task_type; ?></td>

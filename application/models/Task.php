@@ -57,11 +57,13 @@ class Task extends CI_Model {
 		if($this->check_completed($id))
 			return false;
 
-		$query = $this->db->select('event.name AS event_name,task.*,task_type.name AS task_type,task_type.image AS task_image,supplier.name AS supplier_name,supplier.booth_no')
+		$query = $this->db->select('event.name AS event_name,task.*,task_type.name AS task_type,task_type.image AS task_image,supplier.name AS supplier_name,event_supplier.booth_no')
 		->from('task')
 		->join('event','task.event_id = event.event_id','inner')
 		->join('supplier','supplier.login_id = task.login_id','inner')
 		->join('task_type','task.task_type_id = task_type.task_type_id','inner')
+		->join('event_supplier','supplier.supplier_id = event_supplier.supplier_id')
+		->where('event_supplier.event_id',$id)
 		->where('task.task_id',$id)
 		->get();
 		return $this->fetch_result($query);
@@ -86,13 +88,15 @@ class Task extends CI_Model {
 
 	public function get_by_event_id($id = false)
 	{
-		$query = $this->db->select('event.name AS event_name,task.*,event.image,task_type.name AS task_type,task_type.image AS task_image,supplier.name AS supplier_name,supplier.booth_no')
+		$query = $this->db->select('event.name AS event_name,task.*,event.image,task_type.name AS task_type,task_type.image AS task_image,supplier.name AS supplier_name,event_supplier.booth_no')
 		->from('task')
 		->join('event','task.event_id = event.event_id')
 		->join('supplier','supplier.login_id = task.login_id')
 		->join('task_type','task.task_type_id = task_type.task_type_id')
+		->join('event_supplier','supplier.supplier_id = event_supplier.supplier_id')
 		->where('event.event_id',$id)
-		->order_by('supplier.booth_no','asc')
+		->where('event_supplier.event_id',$id)
+		->order_by('event_supplier.booth_no','asc')
 		->get();
 		return $this->fetch_result($query);
 	}
@@ -114,11 +118,12 @@ class Task extends CI_Model {
 
 	public function get_all($login_id = false)
 	{
-		$this->db->select('event.name AS event_name,task.*,task_type.name AS task_type,COUNT(task_completed.task_id) AS num_completed')
+		$this->db->select('supplier.name AS supplier_name,event.name AS event_name,task.*,task_type.name AS task_type,COUNT(task_completed.task_id) AS num_completed')
 		->from('task')
 		->join('event','task.event_id = event.event_id')
 		->join('task_completed','task.task_id = task_completed.task_id','left')
 		->join('task_type','task.task_type_id = task_type.task_type_id')
+		->join('supplier','task.login_id = supplier.login_id')
 		->group_by('task.task_id');
 		if($login_id !== false)
 			$this->db->where("task.login_id",$login_id);

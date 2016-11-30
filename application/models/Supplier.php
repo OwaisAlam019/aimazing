@@ -21,7 +21,6 @@ class Supplier extends CI_Model {
 		$data = array(
 			'login_id' => $login_id,
 			'name' => $this->input->post("name"),
-			'booth_no' => $this->input->post("booth_no"),
 			'image' => $processed_logo
 		);
 		$this->db->insert('supplier',$data);
@@ -40,8 +39,7 @@ class Supplier extends CI_Model {
 
 
 		$data = array(
-			'name' => $this->input->post("name"),
-			'booth_no' => $this->input->post("booth_no"),
+			'name' => $this->input->post("name")
 		);
 		$processed_logo = $this->process_logo($_FILES["logo"]);
 
@@ -137,6 +135,19 @@ class Supplier extends CI_Model {
 		}
 
 		return false;
+	}
+
+	public function get_event_supplier($id)
+	{
+		$this->db->select("*")
+			     ->from("event_supplier")
+			     ->join('supplier','event_supplier.supplier_id = supplier.supplier_id')
+			     ->where('event_supplier.event_id',$id);
+		$result=$this->db->get();
+		return $result->result_array();
+
+
+
 	}
 
 

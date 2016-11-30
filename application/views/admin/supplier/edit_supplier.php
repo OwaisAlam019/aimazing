@@ -36,10 +36,6 @@
 										<input type="text" class="form-control" name="name" value="<?php if(isset($row->name)){echo $row->name;} ?>" id="name" placeholder="Enter Full Name">
 									</div>
 									<div class="form-group">
-										<label for="booth_no">Booth #</label>
-										<input type="text" class="form-control" name="booth_no" value="<?php if(isset($row->booth_no)){echo $row->booth_no;} ?>" id="booth_no"  placeholder="Booth #">
-									</div>
-									<div class="form-group">
 										<label for="logo">Logo</label>
 										<input type="file" class="btn btn-danger" name="logo" id="logo">
 									</div>

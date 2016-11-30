@@ -37,7 +37,6 @@ class Site extends CI_Controller {
 
 			$this->load->model('task');
 			$task_list = $this->task->get_by_event_id($id);
-			// var_dump($task_list);
 			if($task_list){
 				$data["task_list"] = $task_list;
 				$data["image"] = $task_list[0]->image;

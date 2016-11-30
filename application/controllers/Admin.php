@@ -83,6 +83,7 @@ class Admin extends CI_Controller {
 	public function list_tasks($event_id = false)
 	{
 		$this->load->model('task');
+		//$this->task->get_by_event_id("10");
 		$list = $this->task->get_tasks_for_dash($event_id);
 		if($list){
 			$data["list"] = $list;
@@ -147,7 +148,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function add_event()
-	{
+	{	
+		$this->load->model('supplier');
+		$data["suppliers"] = $this->supplier->get_all();
 		$data["event"] = 'active';
 		$data["content"] = 'admin/event/add_event';
 		$this->load->view('admin/includes/template', $data);
@@ -156,10 +159,13 @@ class Admin extends CI_Controller {
 	public function list_event()
 	{
 		$this->load->model('event');
+		$this->load->model('supplier');
 		$list = $this->event->get_all();
 		if($list){
 			$data["list"] = $list;
 		}
+
+		$data["suppliers"] = $this->supplier->get_all();
 		$data["event"] = 'active';
 		$data["content"] = 'admin/event/list_event';
 		$this->load->view('admin/includes/template', $data);
@@ -167,8 +173,10 @@ class Admin extends CI_Controller {
 
 	public function edit_del_event($id = false,$action = false)
 	{
+		$this->load->model('event');
+		$this->load->model('supplier');
 		if($id && $action){
-			$this->load->model('event');
+			
 			if($action === "delete"){
 				$this->event->delete($id);
 				$this->list_event();
@@ -177,6 +185,7 @@ class Admin extends CI_Controller {
 				$list = $this->event->get_by_id($id);
 				if($list){
 					$data["list"] = $list;
+					$data["event_suppliers"] = $this->supplier->get_event_supplier($id);
 					$data["event"] = 'active';
 					$data["content"] = 'admin/event/edit_event';
 					$this->load->view('admin/includes/template', $data);

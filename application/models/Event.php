@@ -29,7 +29,8 @@ class Event extends CI_Model {
 			$len = count($this->input->post("supplier_id"));
 
 				for ($i=0; $i<$len ; $i++)  {
-			$this->db->insert('event_supplier',array("event_id" =>$event_id,
+					if(!empty($this->input->post("booth_no")[$i]))
+					$this->db->insert('event_supplier',array("event_id" =>$event_id,
 													 "supplier_id"=>$this->input->post("supplier_id")[$i],
 													 "booth_no"=>$this->input->post("booth_no")[$i]));
 		}
@@ -40,7 +41,11 @@ class Event extends CI_Model {
 	}
 
 	public function update()
-	{
+	{	
+		// echo "<pre>";
+		// var_dump($this->input->post());
+		// echo "</pre>";
+		// exit();
 		$data = array(
 			'name' => $this->input->post("name"),
 			'start' => date("Y-m-d", strtotime($this->input->post("start"))),
@@ -58,7 +63,8 @@ class Event extends CI_Model {
 		$len = count($this->input->post("supplier_id"));
 
 				for ($i=0; $i<$len ; $i++)  {
-			$this->db->insert('event_supplier',array("event_id" =>$this->input->post('event_id'),
+					if(!empty($this->input->post("booth_no")[$i]))
+					$this->db->insert('event_supplier',array("event_id" =>$this->input->post('event_id'),
 													 "supplier_id"=>$this->input->post("supplier_id")[$i],
 													 "booth_no"=>$this->input->post("booth_no")[$i]));
 		}

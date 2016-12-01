@@ -139,10 +139,10 @@ class Supplier extends CI_Model {
 
 	public function get_event_supplier($id)
 	{
+
 		$this->db->select("*")
-			     ->from("event_supplier")
-			     ->join('supplier','event_supplier.supplier_id = supplier.supplier_id')
-			     ->where('event_supplier.event_id',$id);
+			     ->from("supplier")
+			     ->join('(SELECT  supplier_id AS event_supp_id ,event_id,booth_no FROM event_supplier WHERE event_id = '.$id.')AS event_supp','supplier.supplier_id = event_supp.event_supp_id','left');
 		$result=$this->db->get();
 		return $result->result_array();
 

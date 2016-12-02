@@ -3,7 +3,7 @@
 	<!-- SIDEBAR -->
 	<div id="sidebar" class="sidebar">
 		<div class="sidebar-menu nav-collapse">
-			<div class="divide-50"><img src="<?=base_url();?>img/logo/logo.png" style="
+			<div class="divide-50"><img src="<?=base_url();?>frontend/images/Race_logo.jpg" style="
 			    width: 90%;
 			    margin: auto;
 			    display: block;

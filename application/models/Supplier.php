@@ -97,6 +97,7 @@ class Supplier extends CI_Model {
 		$query = $this->db->select('login.username,supplier.*')
 		->from('login')
 		->join('supplier','login.login_id = supplier.login_id')
+		->order_by('supplier.name','ASC')
 		->get();
 
 		return $this->fetch_result($query);
@@ -142,7 +143,8 @@ class Supplier extends CI_Model {
 
 		$this->db->select("*")
 			     ->from("supplier")
-			     ->join('(SELECT  supplier_id AS event_supp_id ,event_id,booth_no FROM event_supplier WHERE event_id = '.$id.')AS event_supp','supplier.supplier_id = event_supp.event_supp_id','left');
+			     ->join('(SELECT  supplier_id AS event_supp_id ,event_id,booth_no FROM event_supplier WHERE event_id = '.$id.')AS event_supp','supplier.supplier_id = event_supp.event_supp_id','left')
+				->order_by('supplier.name','ASC');
 		$result=$this->db->get();
 		return $result->result_array();
 

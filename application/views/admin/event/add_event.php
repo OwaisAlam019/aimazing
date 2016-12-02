@@ -77,7 +77,7 @@
 												<tr>
 													<td><?php echo $n; ?></td>
 													<td>
-													<label><?php echo $supplier->username; ?></label>
+													<label><?php echo $supplier->name; ?></label>
 													<input type="hidden" name="supplier_id[]" value="<?php echo $supplier->supplier_id; ?>">
 													</td>
 													<td><input type="text" name="booth_no[]"></td>

@@ -59,7 +59,7 @@
 										<select class="form-control" name="supplier_login_id" id="login_id">
 											<?php if (isset($suppliers)): ?>
 												<?php foreach ($suppliers as $supplier ): ?>
-													<option <?php echo($supplier->login_id === $row->login_id)?"selected":""; ?> value="<?php echo $supplier->login_id; ?>"><?php echo $supplier->username; ?></option>
+													<option <?php echo($supplier->login_id === $row->login_id)?"selected":""; ?> value="<?php echo $supplier->login_id; ?>"><?php echo $supplier->name; ?></option>
 												<?php endforeach ?>
 											<?php endif ?>
 										</select>

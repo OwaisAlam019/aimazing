@@ -63,7 +63,7 @@ class Task extends CI_Model {
 		->join('supplier','supplier.login_id = task.login_id','inner')
 		->join('task_type','task.task_type_id = task_type.task_type_id','inner')
 		->join('event_supplier','supplier.supplier_id = event_supplier.supplier_id')
-		->where('event_supplier.event_id',$id)
+		->where('event_supplier.event_id = task.event_id')
 		->where('task.task_id',$id)
 		->get();
 		return $this->fetch_result($query);

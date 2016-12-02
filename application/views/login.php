@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title>AIMastermind Group Arts Services</title>
+	<title>THE AIMAZING RACE</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
 							<div id="logo">
-								<img src="<?=base_url(); ?>img/logo/logo.png" height="50" alt="logo name" />
+								<img src="<?=base_url(); ?>frontend/images/Race_logo.jpg" height="80" alt="logo name" />
 							</div>
 						</div>
 					</div>

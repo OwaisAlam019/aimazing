@@ -8,13 +8,13 @@ class Supplier extends CI_Controller {
 		parent::__construct();
 		//$this->output->enable_profiler(TRUE);
 		
-		$logged_in = $this->session->userdata('is_logged_in');
-		$auth_type = $this->session->userdata('auth_type');
+		// $logged_in = $this->session->userdata('is_logged_in');
+		// $auth_type = $this->session->userdata('auth_type');
 
-		if(!($logged_in == 'yes') || !($auth_type == 'supplier')){
+		// if(!($logged_in == 'yes') || !($auth_type == 'supplier')){
 
-			$this->logout();
-		}
+		// 	$this->logout();
+		// }
 	}
 
 	public function index()

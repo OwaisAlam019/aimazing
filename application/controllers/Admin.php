@@ -9,9 +9,9 @@ class Admin extends CI_Controller {
 		$logged_in = $this->session->userdata('is_logged_in');
 		$auth_type = $this->session->userdata('auth_type');
 
-		if(!($logged_in == 'yes') || !($auth_type == 'admin')){
-			$this->logout();
-		}
+		// if(!($logged_in == 'yes') || !($auth_type == 'admin')){
+		// 	$this->logout();
+		// }
 	}
 	public function index()
 	{
